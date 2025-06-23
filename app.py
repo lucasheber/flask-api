@@ -63,6 +63,27 @@ def update_task(task_id):
     return jsonify(task.to_dict()), 200
 
 
+@app.route("/tasks/<int:task_id>", methods=["DELETE"])
+def delete_task(task_id):
+    global tasks
+    task = get_task(task_id)
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    tasks = [t for t in tasks if t.id != task_id]
+    return jsonify({"message": "Task deleted successfully"}), 200
+
+
+@app.route("/tasks/complete/<int:task_id>", methods=["PATCH"])
+def complete_task(task_id):
+    task = next((task for task in tasks if task.id == task_id), None)
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    task.completed = True
+    return jsonify(task.to_dict()), 200
+
+
 def main():
     app.run(host="0.0.0.0", port=3000, debug=True)
 
