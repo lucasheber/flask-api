@@ -23,14 +23,14 @@ def index():
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
-    return jsonify([task.to_dict() for task in tasks]), 200
+    return jsonify([task.to_dict() for task in tasks])
 
 
 @app.route("/tasks/<int:task_id>", methods=["GET"])
 def get_task_by_id(task_id):
     task = next((task for task in tasks if task.id == task_id), None)
     if task:
-        return jsonify(task.to_dict()), 200
+        return jsonify(task.to_dict())
     else:
         return jsonify({"error": "Task not found"}), 404
 
@@ -60,7 +60,7 @@ def update_task(task_id):
     task.title = data.get("title", task.title)
     task.description = data.get("description", task.description)
 
-    return jsonify(task.to_dict()), 200
+    return jsonify(task.to_dict())
 
 
 @app.route("/tasks/<int:task_id>", methods=["DELETE"])
@@ -71,7 +71,7 @@ def delete_task(task_id):
         return jsonify({"error": "Task not found"}), 404
 
     tasks = [t for t in tasks if t.id != task_id]
-    return jsonify({"message": "Task deleted successfully"}), 200
+    return jsonify({"message": "Task deleted successfully"})
 
 
 @app.route("/tasks/<int:task_id>/complete", methods=["PATCH"])
@@ -81,7 +81,7 @@ def complete_task(task_id):
         return jsonify({"error": "Task not found"}), 404
 
     task.completed = True
-    return jsonify(task.to_dict()), 200
+    return jsonify(task.to_dict())
 
 
 def main():
