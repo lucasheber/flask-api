@@ -74,7 +74,7 @@ def delete_task(task_id):
     return jsonify({"message": "Task deleted successfully"}), 200
 
 
-@app.route("/tasks/complete/<int:task_id>", methods=["PATCH"])
+@app.route("/tasks/<int:task_id>/complete", methods=["PATCH"])
 def complete_task(task_id):
     task = next((task for task in tasks if task.id == task_id), None)
     if not task:
