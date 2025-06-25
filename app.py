@@ -76,7 +76,8 @@ def delete_task(task_id):
 
 @app.route("/tasks/<int:task_id>/complete", methods=["PATCH"])
 def complete_task(task_id):
-    task = next((task for task in tasks if task.id == task_id), None)
+    task = get_task(task_id)
+    
     if not task:
         return jsonify({"error": "Task not found"}), 404
 
