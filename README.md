@@ -22,7 +22,7 @@ This API provides basic CRUD operations for a user management system.
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/lucasheber/flask-api.git
    cd flask-api
    ```
 
@@ -40,3 +40,31 @@ This API provides basic CRUD operations for a user management system.
    ```bash
    python app.py
    ```
+
+### Testing
+To run the tests, you can use pytest. Make sure your Flask application is running, then execute the following command in a separate terminal:
+
+```bash
+pytest tests.py
+```
+### Usage
+You can use tools like Postman or curl to interact with the API. Here are some example commands:
+
+```bash
+# Create a new task
+curl -X POST -H "Content-Type: application/json" -d '{"title": "New Task", "description": "Task description"}' http://localhost:3000/tasks
+
+# Get all tasks
+curl -X GET http://localhost:3000/tasks
+
+# Get a task by ID
+curl -X GET http://localhost:3000/tasks/1
+
+# Update a task
+curl -X PUT -H "Content-Type: application/json" -d '{"title": "Updated Task", "description": "Updated description"}' http://localhost:3000/tasks/1
+
+# Complete a task
+curl -X PATCH http://localhost:3000/tasks/1/complete
+
+# Delete a task
+curl -X DELETE http://localhost:3000/tasks/1
